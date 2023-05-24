@@ -15,7 +15,7 @@ const handler = asyncError(async (req, res) => {
 
     // FOR UPDATE and DELETE
 
-    if (req.method !== "PUT") {
+    if (req.method === "PUT") {
         //  For Update Task
         task.isCompleted = !task.isCompleted;
 
@@ -27,7 +27,7 @@ const handler = asyncError(async (req, res) => {
         });
     }
 
-    else if (req.method !== "DELETE") {
+    else if (req.method === "DELETE") {
 
         // for deleting task
 

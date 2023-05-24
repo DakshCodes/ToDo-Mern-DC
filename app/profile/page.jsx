@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useContext } from "react";
-import { Context } from "../../components/Clients";
+
 import { redirect } from "next/navigation";
+import { Context } from "@/components/Clients";
 
 const Page = () => {
   const { user } = useContext(Context);

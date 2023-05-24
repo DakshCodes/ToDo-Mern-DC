@@ -28,7 +28,10 @@ const Page = () => {
       if(data.succes){
         setUser(data.user)
       }
-    } catch (err) { }
+    } catch (err) { 
+      toast.error(err);
+    }
+    
   }
 
   if(user._id) return redirect('/')
@@ -36,7 +39,7 @@ const Page = () => {
   return (
     <div className="login">
       <section>
-        <form>
+        <form onSubmit={loginHandler}>
           <input
             onChange={(e) => setEmail(e.target.value)}
             value={email}

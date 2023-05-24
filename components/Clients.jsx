@@ -43,7 +43,7 @@ export const LogoutBtn = () => {
       toast.success(data.message);
 
     } catch (err) {
-      toast.error(data.message)
+      toast.error(err)
     }
   };
 
@@ -57,19 +57,40 @@ export const LogoutBtn = () => {
 };
 
 export const TodoButton = ({ id, completed }) => {
-
+  const router = useRouter();
 
   const deleteHandler = async (id) => {
-
+    try {
+      const res = await fetch(`/api/task/${id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      // if (!data.success) return toast.error(data.message);
+      toast.success(data.message)
+      router.refresh();
+    } catch (err) {
+      toast.error(err);
+    }
   };
 
   const updateHandler = async (id) => {
-
+    try {
+      const res = await fetch(`/api/task/${id}`, {
+        method: "PUT"
+      });
+      const data = await res.json();
+      // if (!data.success) return toast.error(data.message);
+      toast.success(data.message)
+      router.refresh();
+    } catch (err) {
+      toast.error(err);
+    }
   };
 
   return (
     <>
       <input
+        className="check"
         type="checkbox"
         checked={completed}
         onChange={() => updateHandler(id)}

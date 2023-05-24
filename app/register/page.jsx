@@ -1,6 +1,6 @@
 "use client";
 
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation';
 import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -31,44 +31,51 @@ const Page = () => {
       if (!data.success) {
         return toast.error(data.message)
       }
+      toast.success(data.message);
       setUser(data.user)
-    } catch (err) {
+      setName('')
+      setEmail('')
+      setPassword('')
+    }
+    catch (err) {
       toast.error(data.message)
     }
 
   }
+  if (user._id) {
+    return res.redirect('/')
+  }
 
-}
 
-if (user._id) return redirect('/')
-return (
-  <div className="login">
-    <section>
-      <form >
-        <input
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-          type="text"
-          placeholder="Enter Name"
-        />
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          type="email"
-          placeholder="Enter Email"
-        />
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          type="password"
-          placeholder="Enter Password"
-        />
-        <button type="submit">Sign Up</button>
-        <p>OR</p>
-        <Link href={"/login"}>Log In</Link>
-      </form>
-    </section>
-  </div>
-);
+  return (
+    <div className="login">
+      <section>
+        <form onSubmit={registerHandle} >
+          <input
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            type="text"
+            placeholder="Enter Name"
+          />
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            type="email"
+            placeholder="Enter Email"
+          />
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            type="password"
+            placeholder="Enter Password"
+          />
+          <button type="submit">Sign Up</button>
+          <p>OR</p>
+          <Link href={"/login"}>Log In</Link>
+        </form>
+      </section>
+    </div>
+  )
+};
 
 export default Page;

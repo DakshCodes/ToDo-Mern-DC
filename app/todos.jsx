@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import React from "react";
 import { TodoItem } from "../components/ServerComponents";
-import { cookies } from "next/headers";
+
 import { redirect } from "next/navigation";
 
 const fetchTodo = async (token) => {
@@ -28,8 +28,9 @@ const Todos = async () => {
 
 
   if (!token) return redirect("/login")
-  
+
   const tasks = await fetchTodo(token)
+  console.log(tasks.length)
 
   return (
     <section className="todosContainer">
