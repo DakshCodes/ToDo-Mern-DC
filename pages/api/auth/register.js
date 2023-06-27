@@ -28,8 +28,6 @@ const handler = asyncError(async (req, res) => {
   });
 
   // set here  cookie... for resgister
-
-  //  
   const token = genrateToken(user._id)
 
 
